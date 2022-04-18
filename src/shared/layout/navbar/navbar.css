@@ -1,0 +1,24 @@
+nav a{
+  border-right: 1px solid white;
+  padding: 0 16px;
+  text-decoration: none;
+  color: black;
+  color: white;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: 0.4s;
+}
+
+nav a:hover{
+  color: rgb(224, 224, 224);
+}
+
+nav a.active{
+  font-weight: bold;
+  /* color: rgb(107, 107, 107); */
+}
+
+nav a:last-child{
+  border-right: none;
+  padding-right: 0;
+}
