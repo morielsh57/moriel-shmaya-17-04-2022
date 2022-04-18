@@ -1,0 +1,38 @@
+main{
+  padding: 20px 120px;
+}
+
+main .search {
+  display: flex;
+  justify-content: center;
+}
+
+main .search button{
+  background-color: transparent;
+  border: none;
+  margin-right: -32px;
+  z-index: 2;
+  cursor: pointer;
+  color:rgb(64, 123, 148);
+  font-size: calc(15em/16);
+}
+
+main .search input{
+  padding: 8px 18px 8px 40px;
+  font-size: 1em;
+  border: transparent;
+  border: 2px solid rgb(121, 176, 199);
+  border-radius: 6px;
+  width: 300px;
+}
+
+main .search input:focus{
+  outline: none;
+}
+
+main .weather-container{
+  margin-top: 30px;
+  padding: 8px;
+  background-color: rgba(145, 157, 161, 0.205);
+  height: 500px;
+}

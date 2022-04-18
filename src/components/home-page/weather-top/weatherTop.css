@@ -1,0 +1,15 @@
+.weather-top{
+  /* color: white; */
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+}
+
+.weather-top .current{
+  line-height: 22px;
+}
+
+.weather-top .fav{
+  font-size: 1.3em;
+}
