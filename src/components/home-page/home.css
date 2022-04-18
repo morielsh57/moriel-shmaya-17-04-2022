@@ -31,8 +31,21 @@ main .search input:focus{
 }
 
 main .weather-container{
+  border-radius: 8px;
   margin-top: 30px;
   padding: 8px;
-  background-color: rgba(145, 157, 161, 0.205);
-  height: 500px;
+  background-color: rgba(145, 157, 161, 0.116);
+}
+
+main .weather-container .clouds{
+  text-align: center;
+}
+
+main .weather-container .clouds img{
+  margin-left: -70px;
+  width: 24%;
+}
+
+main .weather-container .clouds img:first-child{
+  margin-left: 0;
 }
