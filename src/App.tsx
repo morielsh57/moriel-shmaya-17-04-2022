@@ -1,13 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
 import Favorite from './components/favorite-page/favorite';
 import Home from './components/home-page/home';
-import { FAVORITE_URL, HOME_URL } from './shared/consts/url';
 import Layout from './shared/layout/layout';
+import { FAVORITE_URL, HOME_URL } from './shared/consts/url';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import WeatherReducer from './shared/reducers/weatherReducer';
+import './App.css';
 
 function App() {
+  const store = createStore(WeatherReducer);
   return (
+    <Provider store={store}>
     <div className="App">
       <Router>
         <Routes>
@@ -18,6 +23,7 @@ function App() {
         </Routes>
       </Router>
     </div>
+    </Provider>
   );
 }
 
