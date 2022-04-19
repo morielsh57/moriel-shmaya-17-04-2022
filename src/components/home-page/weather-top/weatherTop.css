@@ -1,15 +1,25 @@
 .weather-top{
   /* color: white; */
-  font-weight: 500;
+  /* font-weight: 500; */
   display: flex;
   justify-content: space-between;
   padding: 10px 15px;
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 
-/* .weather-top .current{
+.weather-top .current{
+  width: 50%;
+  display: flex;
+  align-items: center;
 }
 
-.weather-top .fav{
+.weather-top .current img{
+  width: 20%;
+  margin-right: -10px;
+  margin-left: -15px;
+  margin-top: 6px;
+}
+
+/* .weather-top .fav{
   font-size: 1.3em;
 } */
