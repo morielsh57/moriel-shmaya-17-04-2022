@@ -1,0 +1,1 @@
+export const TEL_AVIV_KEY = "215854";
