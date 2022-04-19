@@ -1,21 +1,6 @@
 .five-days-forecasts{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 30px ;
-}
-
-.forcasts-card{
-  box-shadow: -2px 7px 30px -12px rgba(0,0,0,0.75);
-  padding: 12px 0;
-  /* border: 1px solid black; */
-  border-radius: 5px;
-  text-align: center;
-  width: 18%;
-}
-
-.forcasts-card img{
-  width: 60%;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }

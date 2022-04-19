@@ -1,36 +1,27 @@
 import React from "react";
-import { weatherIconsMap } from "../../../shared/consts/icons/weatherIconsMap";
+import { useSelector } from "react-redux";
+import { ILocationForecastsT, IWeatherReducerStateT } from "../../../shared/reducers/reducerModels";
 import "./fiveDaysForecasts.css";
+import ForecastsCard from "./forecasts-card/forecastsCard";
 
 const FiveDaysForecasts: React.FC = () => {
+  const locationForecasts = useSelector((store:IWeatherReducerStateT) => store.locationForecasts);
 
   return (
     <div className="five-days-forecasts">
-      <div className="forcasts-card">
-        <div>Sunday</div>
-        <img src={weatherIconsMap.get(2)} alt="icon" />
-        <div>34°c</div>
-      </div>
-      <div className="forcasts-card">
-        <div>Manday</div>
-        <img src={weatherIconsMap.get(1)} alt="icon" />
-        <div>30°c</div>
-      </div>
-      <div className="forcasts-card">
-        <div>Tusday</div>
-        <img src={weatherIconsMap.get(4)} alt="icon" />
-        <div>24°c</div>
-      </div>
-      <div className="forcasts-card">
-        <div>Sunday</div>
-        <img src={weatherIconsMap.get(5)} alt="icon" />
-        <div>34°c</div>
-      </div>
-      <div className="forcasts-card">
-        <div>Sunday</div>
-        <img src={weatherIconsMap.get(6)} alt="icon" />
-        <div>32°c</div>
-      </div>
+      {
+        locationForecasts.map((dayItem:ILocationForecastsT,indx:number) => {
+          return(
+            <ForecastsCard
+            key={indx}
+            epochDate={dayItem.EpochDate}
+            iconNumberApi={dayItem.dayIcon}
+            minTemperature={dayItem.minTemp}
+            maxTemperature={dayItem.maxTemp}
+            />
+          );
+        })
+      }
     </div>
   );
 }

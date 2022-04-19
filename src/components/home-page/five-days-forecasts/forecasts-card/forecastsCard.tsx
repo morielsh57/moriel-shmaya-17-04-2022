@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { weatherIconsMap } from "../../../../shared/consts/icons/weatherIconsMap";
 import "./forecastsCard.css";
 
 interface IForecastsCardProps{
-  day: "Sun." | "Mon." | "Tue." | "Wed." | "Thu." | "Fri." |"Sat.";
+  // day: "Sun." | "Mon." | "Tue." | "Wed." | "Thu." | "Fri." |"Sat.";
+  epochDate: number;
   iconNumberApi: number;
-  temperature: number;
+  minTemperature: number;
+  maxTemperature: number;
 }
 
-const ForecastsCard: React.FC<IForecastsCardProps> = ({day,iconNumberApi,temperature}) => {
+const ForecastsCard: React.FC<IForecastsCardProps> = ({epochDate,iconNumberApi,minTemperature,maxTemperature}) => {
+  const daysArray = ["Sun." , "Mon." , "Tue." , "Wed." , "Thu." , "Fri." ,"Sat."];
+  const [day,setDay] = useState<string>("");
+
+  useEffect(() => {
+    getDayFromEpochDate();
+  },[]);
+
+  const getDayFromEpochDate = () => {
+    const date = convertEpochDateToLocalDate();
+    setDay(daysArray[date.getDay()]);
+    
+  }
+
+  const convertEpochDateToLocalDate = () => {
+    let date = new Date(0); // The 0 there is the key, which sets the date to the epoch
+    date.setUTCSeconds(epochDate);
+    return date;
+  }
 
   return (
     <div className="forcasts-card">
       <div className="day">{day}</div>
       <img src={weatherIconsMap.get(iconNumberApi)} alt="icon" />
-      <div className="temp">{temperature}°c</div>
+      <div className="temp">{minTemperature}°c - {maxTemperature}°c</div>
     </div>
   );
 }
