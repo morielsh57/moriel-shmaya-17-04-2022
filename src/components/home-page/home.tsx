@@ -1,28 +1,29 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import WeatherTop from "./weather-top/weatherTop";
-import cloudImg from "../../assets/images/clouds.png";
-import "./home.css";
 import FiveDaysForecasts from "./five-days-forecasts/fiveDaysForecasts";
 import SearchLocation from "./search-location/searchLocation";
-import { GET_FIVE_DAYS_FORECASTS } from "../../shared/services/api.service";
-import { useDispatch } from "react-redux";
-import { IWeatherReducerStateT } from "../../shared/reducers/reducerModels";
-import { useSelector } from "react-redux";
+import { GET_CURRENT_WEATHER_BY_KEY, GET_FIVE_DAYS_FORECASTS } from "../../shared/services/api.service";
+import { ICurrentWeatherLocationT, ILocationForecastsT, IWeatherReducerStateT } from "../../shared/reducers/reducer.interfaces";
+import { SET_CURRENT_WEATHER_LOCATION_ACTION, SET_LOCATION_FORECASTS_ACTION } from "../../shared/consts/strings";
+import { ICurrentWeatherLocationApiT, IFiveDailyForecastsApiDailyForecastsT, IFiveDailyForecastsApiT } from "../../shared/consts/weatherApi.interfaces";
+import "./home.scss";
 
 const Home: React.FC = (props) => {
   const dispatch = useDispatch();
   const locationSelected = useSelector((store: IWeatherReducerStateT) => store.locationSelected);
-  // const telAvivKey = "215854";
+  const locationForecasts = useSelector((store: IWeatherReducerStateT) => store.locationForecasts);
 
   useEffect(() => {
-    getTelAviv5Forecasts();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // getlocation5Forecasts();
+    // getCurrentWeatherByLocation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locationSelected]);
 
-  const getTelAviv5Forecasts = async () => {
+  const getlocation5Forecasts = async () => {
     try {
-      const forecastsRes = await GET_FIVE_DAYS_FORECASTS(locationSelected.key, true);
-      const locationForecasts = forecastsRes.DailyForecasts.map((dayItem: any) => {
+      const forecastsRes:IFiveDailyForecastsApiT = await GET_FIVE_DAYS_FORECASTS(locationSelected.key, true);
+      const locationForecasts:ILocationForecastsT[] = forecastsRes.DailyForecasts.map((dayItem: IFiveDailyForecastsApiDailyForecastsT) => {
         return {
           EpochDate: dayItem.EpochDate,
           minTemp: dayItem.Temperature.Minimum.Value,
@@ -31,26 +32,44 @@ const Home: React.FC = (props) => {
           nightIcon: dayItem.Night.Icon
         }
       });
-      console.log("defualt",locationForecasts);
-      dispatch({type:"SET_SELECTED_LOCATION",locationForecasts:locationForecasts});
+      dispatch({ type: SET_LOCATION_FORECASTS_ACTION, locationForecasts: locationForecasts });
     }
     catch (err) {
       console.log(err);
     }
   }
 
+
+  const getCurrentWeatherByLocation = async () => {
+    try {
+      const currentWeatherRes:ICurrentWeatherLocationApiT = await GET_CURRENT_WEATHER_BY_KEY(locationSelected.key);
+      const currentWeather:ICurrentWeatherLocationT = {
+        cityKey: locationSelected.key,
+        cityName: locationSelected.location,
+        weatherText: currentWeatherRes.WeatherText,
+        iconNumber: currentWeatherRes.WeatherIcon,
+        temperature: {
+          C: currentWeatherRes.Temperature.Metric.Value,
+          F: currentWeatherRes.Temperature.Imperial.Value
+        }
+      }
+      dispatch({ type: SET_CURRENT_WEATHER_LOCATION_ACTION, currentWeatherLocation: currentWeather });
+    }
+    catch (err) {
+      console.log(err);
+
+    }
+  }
+
   return (
     <main>
-      <div className="weather-container">
-        <SearchLocation />
-        <WeatherTop />
-        <div className="clouds">
-          <img src={cloudImg} alt="cloud" />
-          <img src={cloudImg} alt="cloud" />
-          <img src={cloudImg} alt="cloud" />
+      {locationForecasts.length > 0 &&
+        <div className="weather-container">
+          <SearchLocation />
+          <WeatherTop />
+          <FiveDaysForecasts />
         </div>
-        <FiveDaysForecasts />
-      </div>
+      }
     </main>
   );
 }

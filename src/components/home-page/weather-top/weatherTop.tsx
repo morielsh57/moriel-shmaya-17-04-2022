@@ -1,46 +1,26 @@
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { weatherIconsMap } from "../../../shared/consts/icons/weatherIconsMap";
-import { IWeatherReducerStateT } from "../../../shared/reducers/reducerModels";
-import { GET_CURRENT_WEATHER } from "../../../shared/services/api.service";
+import { ADD_NEW_FAVORITE_ACTION } from "../../../shared/consts/strings";
+import { IWeatherReducerStateT } from "../../../shared/reducers/reducer.interfaces";
 
-import "./weatherTop.css";
+import "./weatherTop.scss";
 
 const WeatherTop: React.FC = (props) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const locationSelected = useSelector((store: IWeatherReducerStateT) => store.locationSelected);
   const currentWeatherLocation = useSelector((store: IWeatherReducerStateT) => store.currentWeatherLocation);
+  const favoriteList = useSelector((store: IWeatherReducerStateT) => store.favoriteList);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    getCurrentWeatherByLocation();
-  }, [locationSelected]);
-
-  const getCurrentWeatherByLocation = async () => {
-    try {
-      const currentWeatherRes = await GET_CURRENT_WEATHER(locationSelected.key);
-      const currentWeather = {
-        cityKey: locationSelected.key,
-        cityName: locationSelected.location,
-        weatherText: currentWeatherRes[0].WeatherText,
-        iconNumber: currentWeatherRes[0].WeatherIcon,
-        temperature: {
-          C: currentWeatherRes[0].Temperature.Metric.Value,
-          F: currentWeatherRes[0].Temperature.Imperial.Value
-        }
-      }
-      dispatch({ type: "SET_CURRENT_WEATHER_LOCATION", currentWeatherLocation: currentWeather });
-    }
-    catch (err) {
-      console.log(err);
-
-    }
-  }
-
-  const setIsFav = () => {
+  const setIsFav = (type:"remove"|"add") => {
+    console.log("s")
+    if(type==="add") dispatch({type:ADD_NEW_FAVORITE_ACTION, favorite: {cityKey: currentWeatherLocation!.cityKey,cityName: currentWeatherLocation!.cityName}});
+    // else dispatch({type:DELETE_FAVORITE_ACTION, favoriteKey: currentWeatherLocation!.cityKey}); 
     setIsFavorite(!isFavorite);
+    console.log(favoriteList);
+    
   }
 
   return (
@@ -54,9 +34,9 @@ const WeatherTop: React.FC = (props) => {
           </div>
           <div className="fav">
             {isFavorite ?
-              <HeartFilled onClick={setIsFav} />
+              <HeartFilled onClick={()=>setIsFav("remove")} />
               :
-              <HeartOutlined onClick={setIsFav} />
+              <HeartOutlined onClick={()=>setIsFav("add")} />
             }
           </div>
         </section>

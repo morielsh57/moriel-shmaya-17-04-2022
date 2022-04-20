@@ -1,0 +1,45 @@
+main{
+  padding: 10px 120px;
+  .weather-container{
+    opacity: 0;
+    border-radius: 8px;
+    margin-top: 95px;
+    background-color: rgba(145, 157, 161, 0.116);
+    background-image: url("../../assets/images/clouds.png");
+    background-position: right;
+    background-size: contain;
+    -webkit-animation: fadein 4s linear forwards;
+    animation:  fadein 4s linear forwards, animatedBackground 50s linear infinite alternate;
+    .clouds{
+      text-align: center;
+      img{
+        margin-left: -70px;
+        width: 24%;
+        &:first-child{
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+@-webkit-keyframes fadein {
+  0% { opacity: 0; }
+  60% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadein {
+  0% { opacity: 0; }
+  60% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes animatedBackground {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
+}
