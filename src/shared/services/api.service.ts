@@ -1,24 +1,46 @@
-import { GET_CURRENT_WEATHER_URL, GET_CURRENT_WEATHER_URL_PARAMS, GET_FIVE_DAYS_FORECASTS_URL, GET_FIVE_DAYS_FORECASTS_URL_PARAMS, GET_LOCATION_URL } from "../consts/url";
+import axios from "axios";
+import { ACCUWEATHER_API_KEY, ACCUWEATHER_DOMAIN, GET_CURRENT_WEATHER_BY_KEY_URL, GET_FIVE_DAYS_FORECASTS_URL, GET_LOCATION_AUTO_COMPLETE_URL } from "../consts/url";
+import { ICurrentWeatherLocationApiT, IFiveDailyForecastsApiT, ILocationAutoCompleteApiT } from "../consts/weatherApi.interfaces";
 
-const FETCH_API = async (_url: string, _method: "POST" | "PUT" | "PATCH" | "DELETE" | "GET", _body?: any) => {
-  try {
-    let resp = await fetch(_url, {
-      method: _method,
-      body: JSON.stringify(_body),
-      headers: {
-        'content-type': "application/json"
-      }
-    });
-    let data = await resp.json();
-    // console.log(data);
-    return data;
+const axiosInstance = axios.create({
+  baseURL: ACCUWEATHER_DOMAIN,
+  params: {
+    apikey: ACCUWEATHER_API_KEY,
+    language: "en"
+  },
+});
+
+// get list of cities by location query
+export const GET_LOCATION_AUTO_COMPLETE = async(location:string) =>{
+  try{
+    const locationData = await axiosInstance.get<ILocationAutoCompleteApiT[]>(GET_LOCATION_AUTO_COMPLETE_URL,{params:{q:location}});
+    return locationData.data;
   }
-  catch (err) {
-    // console.log(err);
-    return err;
+  catch(error){
+    throw new Error("there is a problem location not found");
   }
 }
 
-export const GET_LOCATION = (location:string) => FETCH_API(GET_LOCATION_URL+location,"GET");
-export const GET_CURRENT_WEATHER = (locationKey:string) => FETCH_API(GET_CURRENT_WEATHER_URL+locationKey+GET_CURRENT_WEATHER_URL_PARAMS,"GET");
-export const GET_FIVE_DAYS_FORECASTS = (locationKey:string,metricValue:boolean) => FETCH_API(GET_FIVE_DAYS_FORECASTS_URL+locationKey+GET_FIVE_DAYS_FORECASTS_URL_PARAMS+metricValue,"GET");
+//get current weather by location key
+export const GET_CURRENT_WEATHER_BY_KEY = async(locationKey:string) =>{
+  try{
+    const currentWeatherUrl = GET_CURRENT_WEATHER_BY_KEY_URL+locationKey
+    const currentWeatherData = await axiosInstance.get<ICurrentWeatherLocationApiT[]>(currentWeatherUrl,{params:{details: false}});
+    return currentWeatherData.data[0];
+  }
+  catch(error){
+    throw new Error("there is a problem");
+  }
+}
+
+// get 5 days daily forecasts by location key and if data in metric(C) value
+export const GET_FIVE_DAYS_FORECASTS = async(locationKey:string,metricValue:boolean) => {
+  try{
+    const forcastsUrl = GET_FIVE_DAYS_FORECASTS_URL+locationKey;
+    const forcastsData = await axiosInstance.get<IFiveDailyForecastsApiT>(forcastsUrl,{params:{metric:metricValue}});
+    return forcastsData.data;
+  }
+  catch(error){
+    throw new Error("there is a problem");
+  }
+}
