@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { ILocationForecastsT, IWeatherReducerStateT } from "../../../shared/reducers/reducerModels";
-import "./fiveDaysForecasts.css";
+import { ILocationForecastsT, IWeatherReducerStateT } from "../../../shared/reducers/reducer.interfaces";
 import ForecastsCard from "./forecasts-card/forecastsCard";
+import "./fiveDaysForecasts.scss";
 
 const FiveDaysForecasts: React.FC = () => {
   const locationForecasts = useSelector((store:IWeatherReducerStateT) => store.locationForecasts);

@@ -7,7 +7,7 @@ import { FAVORITE_URL, HOME_URL } from './shared/consts/url';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import WeatherReducer from './shared/reducers/weatherReducer';
-import './App.css';
+import './App.scss';
 
 function App() {
   const store = createStore(WeatherReducer);

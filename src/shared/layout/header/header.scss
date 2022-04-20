@@ -4,12 +4,10 @@ header{
   align-items: center;
   padding: 15px 18px;
   color: white;
-}
-
-header .logo{
-  font-size: 1.5em;
-}
-
-header .logo span{
-  font-weight: 500;
+  .logo{
+    font-size: 1.5em;
+    span{
+      font-weight: 500;
+    }
+  }
 }

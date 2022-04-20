@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FAVORITE_URL, HOME_URL } from "../../consts/url";
 
-import "./navbar.css";
+import "./navbar.scss";
 
 const Navbar: React.FC = () => {
 

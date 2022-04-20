@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../navbar/navbar";
 
-import "./header.css";
+import "./header.scss";
 
 const Header: React.FC = (props) => {
 

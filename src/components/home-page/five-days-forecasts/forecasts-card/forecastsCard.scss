@@ -1,0 +1,19 @@
+.weather-card{
+  box-shadow: -2px 7px 30px -12px rgba(0,0,0,0.75);
+  padding: 12px 0;
+  border-radius: 5px;
+  text-align: center;
+  width: 14%;
+  .day,.city{
+    font-weight: 500;
+    font-size: 1.1em;
+  }
+  img{
+    width: 70%;
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+  .temp{
+    font-size: 0.9em;
+  }
+}
