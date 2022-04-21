@@ -17,3 +17,31 @@
     font-size: 0.9em;
   }
 }
+
+@media only screen and (max-width: 991px) {
+  .weather-card{
+    width: 18%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .weather-card{
+    width: 60%;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    .day,.city{
+      font-size: 1.7em;
+    }
+    .temp{
+      font-size: 1.4em;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .weather-card{
+    width: 85%;
+    padding: 20px 0;
+    margin-bottom: 30px;
+  }
+}

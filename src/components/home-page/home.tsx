@@ -8,6 +8,7 @@ import { ICurrentWeatherLocationT, ILocationForecastsT, IWeatherReducerStateT } 
 import { SET_CURRENT_WEATHER_LOCATION_ACTION, SET_LOCATION_FORECASTS_ACTION } from "../../shared/consts/strings";
 import { ICurrentWeatherLocationApiT, IFiveDailyForecastsApiDailyForecastsT, IFiveDailyForecastsApiT } from "../../shared/consts/weatherApi.interfaces";
 import "./home.scss";
+import { alertMessage } from "../../shared/consts/notification";
 
 const Home: React.FC = (props) => {
   const dispatch = useDispatch();
@@ -35,7 +36,8 @@ const Home: React.FC = (props) => {
       dispatch({ type: SET_LOCATION_FORECASTS_ACTION, locationForecasts: locationForecasts });
     }
     catch (err) {
-      console.log(err);
+      alertMessage("There was a problem geting the forcasts","error");
+      throw new Error(`There was a problem geting the forcasts: ${err}`);
     }
   }
 
@@ -56,8 +58,8 @@ const Home: React.FC = (props) => {
       dispatch({ type: SET_CURRENT_WEATHER_LOCATION_ACTION, currentWeatherLocation: currentWeather });
     }
     catch (err) {
-      console.log(err);
-
+      alertMessage("There was a problem geting the current weather","error");
+      throw new Error(`There was a problem geting the current weather ${err}`);
     }
   }
 

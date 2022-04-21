@@ -20,7 +20,6 @@ const ForecastsCard: React.FC<IForecastsCardProps> = ({ epochDate, iconNumberApi
   const getDayFromEpochDate = () => {
     const date = convertEpochDateToLocalDate();
     setDay(daysArray[date.getDay()]);
-
   }
 
   const convertEpochDateToLocalDate = () => {
