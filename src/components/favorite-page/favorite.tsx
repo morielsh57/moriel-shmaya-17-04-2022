@@ -5,7 +5,9 @@ import { IWeatherReducerStateT } from "../../shared/reducers/reducer.interfaces"
 import { GET_CURRENT_WEATHER_BY_KEY } from "../../shared/services/api.service";
 import FavoritCard from "./favorite-card/favoriteCard";
 import "../home-page/five-days-forecasts/fiveDaysForecasts.scss";
+import "../home-page/home.scss";
 import './favorite.scss';
+import { alertMessage } from "../../shared/consts/notification";
 
 export interface IFavCurrentWeatherT {
   city: string;
@@ -24,6 +26,7 @@ const Favorite: React.FC = (props) => {
   }, [])
 
   const setCurrentWeatherFavList = async() => {
+    try{
     let favoritesCurrentWeatherArr: IFavCurrentWeatherT[] = [];
     await Promise.all(favoriteList.map(async (cityValue, indx) => {
       const currentWeatherRes: ICurrentWeatherLocationApiT = await GET_CURRENT_WEATHER_BY_KEY(cityValue.cityKey);
@@ -39,14 +42,17 @@ const Favorite: React.FC = (props) => {
       favoritesCurrentWeatherArr.push({ ...favoritesCurrentWeatherobj });
     }));
     setFavsCurrentWeather([...favoritesCurrentWeatherArr]);
-    console.log("favList", favoritesCurrentWeatherArr, favsCurrentWeather);
+  }
+  catch(error){
+    alertMessage("There was a problem geting the favorites weather","error");
+    throw new Error(`There was a problem geting the favorites weather: ${error}`);
+  }
 
   }
 
   return (
-    <>
       <div className="fav-page">
-        <h1>{favoriteList ? "Favorite" : "No Favorite Found"}</h1>
+        <h1>{favoriteList ? "My Favorites" : "No Favorite Found"}</h1>
         {/* <div>{favsCurrentWeather[0].city}</div> */}
         <div className="fav-container">
           {
@@ -64,7 +70,6 @@ const Favorite: React.FC = (props) => {
           }
         </div>
       </div>
-    </>
   );
 }
 export default Favorite;
