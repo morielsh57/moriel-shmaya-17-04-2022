@@ -33,9 +33,10 @@ export interface ILocationSelectetT{
 }
 
 export interface IActionT{
-  type: "ADD_NEW_FAVORITE" | "SET_SELECTED_LOCATION" | "SET_CURRENT_WEATHER_LOCATION" | "SET_LOCATION_FORECASTS";
+  type: "ADD_NEW_FAVORITE" | "REMOVE_FAVORITE" | "SET_SELECTED_LOCATION" | "SET_CURRENT_WEATHER_LOCATION" | "SET_LOCATION_FORECASTS";
   locationForecasts: ILocationForecastsT[];
   currentWeatherLocation:ICurrentWeatherLocationT;
   locationSelected:ILocationSelectetT;
   favorite: IFavoriteListT;
+  favoriteKey: string;
 }
