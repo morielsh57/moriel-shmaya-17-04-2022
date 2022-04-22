@@ -4,14 +4,19 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { weatherIconsMap } from "../../../shared/consts/icons/weatherIconsMap";
 import { ADD_NEW_FAVORITE_ACTION, REMOVE_FAVORITE_ACTION } from "../../../shared/consts/strings";
+import SwitchTempToggle from "../../../shared/layout/switch/temperature-toggle/switchTempToggle";
 import { IWeatherReducerStateT } from "../../../shared/reducers/reducer.interfaces";
 
 import "./weatherTop.scss";
+import "./weatherTopDark.scss";
 
 const WeatherTop: React.FC = (props) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const currentWeatherLocation = useSelector((store: IWeatherReducerStateT) => store.currentWeatherLocation);
   const favoriteList = useSelector((store: IWeatherReducerStateT) => store.favoriteList);
+  const isImperialVal = useSelector((store: IWeatherReducerStateT) => store.isImperialVal);
+  const isDarkMode = useSelector((store: IWeatherReducerStateT) => store.isDarkMode);
+  const temperatureSign = isImperialVal ? "F" : "C";
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,17 +41,18 @@ const WeatherTop: React.FC = (props) => {
     <>
       {
         currentWeatherLocation &&
-        <section className="weather-top">
+        <section className={`weather-top ${isDarkMode && "dark"}`}>
           <div className="current">
             <img src={weatherIconsMap.get(currentWeatherLocation.iconNumber)} alt="icon" />
             <h1>
               {currentWeatherLocation.cityName}
               <br/>
-              <span>{currentWeatherLocation.temperature.C}°c</span>
+              <span>{currentWeatherLocation.temperature}°{temperatureSign}</span>
             </h1>
           </div>
-          <div className="fav">
-            <button>
+          <div className="fav-toggle">
+              <SwitchTempToggle/>
+            <button className="fav-btn">
               {isFavorite ?
                 <HeartFilled onClick={() => setIsFav("remove")} />
                 :

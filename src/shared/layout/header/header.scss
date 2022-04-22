@@ -4,6 +4,10 @@ header{
   align-items: center;
   padding: 15px 18px;
   color: white;
+  .nav-mode-container{
+    display: flex;
+    justify-content: space-between;
+  }
   .logo{
     font-size: 1.5em;
     span{
@@ -12,8 +16,29 @@ header{
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 768px) {
   header{
+    align-items: flex-start;
+    .nav-mode-container{
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      .switch-mode-container{
+        margin-left: 15px;
+        margin-top: 20px;
+        width: 52%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  header{
+    .nav-mode-container{
+      .switch-mode-container{
+        width: 55%;
+      }
+    }
     .logo{
       font-size: 1em;
     }

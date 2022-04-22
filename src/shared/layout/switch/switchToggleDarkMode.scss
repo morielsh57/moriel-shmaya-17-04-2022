@@ -1,0 +1,12 @@
+.switch-container.dark{
+  color: #8a8a8a;
+  .checked{
+    color: white;
+  }
+  .ant-switch{
+    background-color: rgb(241, 241, 241);
+  }
+  .ant-switch-handle::before{
+    background-color: #082c55;
+  }
+}

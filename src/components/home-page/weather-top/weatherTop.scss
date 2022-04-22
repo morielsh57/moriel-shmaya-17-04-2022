@@ -15,12 +15,15 @@
     }
     img{
       width: 20%;
-      margin: 6px -15px 0 -15px;
+      margin: 6px -9px 0 -12px;
     }
   }
-  .fav{
+  .fav-toggle{
     padding: 7px 2px;
-    button{
+    display: flex;
+    align-items: flex-start;
+    justify-content: end;
+    button.fav-btn{
       cursor: pointer;
       border: none;
       background-color: transparent;
