@@ -1,0 +1,58 @@
+.switch-container{
+  color: #8a8a8a;
+  border-radius: 25px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  margin: 5px 20px;
+  padding: 0px 0px;
+
+  > div{
+    font-size: 1.4em;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  > div:last-child{
+    margin-left: 10px;
+  }
+
+  > div:first-child{
+    text-align: end;
+    margin-right: 10px;
+  }
+
+  .checked{
+    color: #082c55;
+    transition: all 0.2s ease-in-out;
+  }
+
+  // overide switch compnent antd style
+  .ant-switch{
+    background-color: #082c55;
+    width: 85px;
+    height: 32px;
+  }
+  
+  .ant-switch-handle{
+    width: 24px;
+    height: 24px;
+    left: 4px;
+    top: 4px;
+    &:before{
+      background-color: rgb(255, 255, 255);
+      border-radius: 50%;
+    }
+  }
+  
+  .ant-switch-checked .ant-switch-handle{
+    left: calc(100% - 26px - 2px);
+  }
+  
+  .ant-switch-checked:focus {
+    box-shadow: none;
+  }
+}
+

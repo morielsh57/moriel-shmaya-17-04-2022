@@ -1,10 +1,20 @@
 .fav-page{
   padding: 10px;
+  -webkit-animation: fadein 0.5s linear forwards;
+  animation:  fadein 0.5s linear forwards;
+  .fav-temp-toggle{
+    display: flex;
+    justify-content: flex-end;
+    .switch-container{
+      width: 111px;
+    }
+  }
   h1{
     text-align: center;
     font-weight: normal;
     font-size: 2.8em;
     margin-bottom: 20px;
+  
   }
   .fav-container{
     display:flex;
@@ -12,5 +22,19 @@
     justify-content: center;
     align-items: center;
     padding: 0 30px 30px 30px;
+    -webkit-animation: fadein 1.5s linear forwards;
+    animation:  fadein 1.5s linear forwards;
   }
+}
+
+@-webkit-keyframes fadein {
+  0% { opacity: 0; }
+  60% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadein {
+  0% { opacity: 0; }
+  60% { opacity: 1; }
+  100% { opacity: 1; }
 }

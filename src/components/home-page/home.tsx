@@ -7,24 +7,30 @@ import { GET_CURRENT_WEATHER_BY_KEY, GET_FIVE_DAYS_FORECASTS } from "../../share
 import { ICurrentWeatherLocationT, ILocationForecastsT, IWeatherReducerStateT } from "../../shared/reducers/reducer.interfaces";
 import { SET_CURRENT_WEATHER_LOCATION_ACTION, SET_LOCATION_FORECASTS_ACTION } from "../../shared/consts/strings";
 import { ICurrentWeatherLocationApiT, IFiveDailyForecastsApiDailyForecastsT, IFiveDailyForecastsApiT } from "../../shared/consts/weatherApi.interfaces";
-import "./home.scss";
 import { alertMessage } from "../../shared/consts/notification";
+
+import "./home.scss";
+import "./homeDark.scss";
 
 const Home: React.FC = (props) => {
   const dispatch = useDispatch();
   const locationSelected = useSelector((store: IWeatherReducerStateT) => store.locationSelected);
   const locationForecasts = useSelector((store: IWeatherReducerStateT) => store.locationForecasts);
+  const isImperialVal = useSelector((store: IWeatherReducerStateT) => store.isImperialVal);
+  const isDarkMode = useSelector((store: IWeatherReducerStateT) => store.isDarkMode);
 
   useEffect(() => {
-    // getlocation5Forecasts();
-    // getCurrentWeatherByLocation();
+    console.log(isImperialVal);
+    
+    getlocation5Forecasts();
+    getCurrentWeatherByLocation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [locationSelected]);
+  }, [locationSelected, isImperialVal]);
 
   const getlocation5Forecasts = async () => {
     try {
-      const forecastsRes:IFiveDailyForecastsApiT = await GET_FIVE_DAYS_FORECASTS(locationSelected.key, true);
-      const locationForecasts:ILocationForecastsT[] = forecastsRes.DailyForecasts.map((dayItem: IFiveDailyForecastsApiDailyForecastsT) => {
+      const forecastsRes: IFiveDailyForecastsApiT = await GET_FIVE_DAYS_FORECASTS(locationSelected.key, !isImperialVal);
+      const locationForecasts: ILocationForecastsT[] = forecastsRes.DailyForecasts.map((dayItem: IFiveDailyForecastsApiDailyForecastsT) => {
         return {
           EpochDate: dayItem.EpochDate,
           minTemp: dayItem.Temperature.Minimum.Value,
@@ -36,7 +42,7 @@ const Home: React.FC = (props) => {
       dispatch({ type: SET_LOCATION_FORECASTS_ACTION, locationForecasts: locationForecasts });
     }
     catch (err) {
-      alertMessage("There was a problem geting the forcasts","error");
+      alertMessage("There was a problem geting the forcasts", "error");
       throw new Error(`There was a problem geting the forcasts: ${err}`);
     }
   }
@@ -44,27 +50,24 @@ const Home: React.FC = (props) => {
 
   const getCurrentWeatherByLocation = async () => {
     try {
-      const currentWeatherRes:ICurrentWeatherLocationApiT = await GET_CURRENT_WEATHER_BY_KEY(locationSelected.key);
-      const currentWeather:ICurrentWeatherLocationT = {
+      const currentWeatherRes: ICurrentWeatherLocationApiT = await GET_CURRENT_WEATHER_BY_KEY(locationSelected.key);
+      const currentWeather: ICurrentWeatherLocationT = {
         cityKey: locationSelected.key,
         cityName: locationSelected.location,
         weatherText: currentWeatherRes.WeatherText,
         iconNumber: currentWeatherRes.WeatherIcon,
-        temperature: {
-          C: currentWeatherRes.Temperature.Metric.Value,
-          F: currentWeatherRes.Temperature.Imperial.Value
-        }
+        temperature: isImperialVal ? currentWeatherRes.Temperature.Imperial.Value : currentWeatherRes.Temperature.Metric.Value
       }
       dispatch({ type: SET_CURRENT_WEATHER_LOCATION_ACTION, currentWeatherLocation: currentWeather });
     }
     catch (err) {
-      alertMessage("There was a problem geting the current weather","error");
+      alertMessage("There was a problem geting the current weather", "error");
       throw new Error(`There was a problem geting the current weather ${err}`);
     }
   }
 
   return (
-    <main>
+    <main className={`${isDarkMode && "dark"}`}>
       {locationForecasts.length > 0 &&
         <div className="weather-container">
           <SearchLocation />
