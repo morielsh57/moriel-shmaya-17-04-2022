@@ -1,11 +1,14 @@
-import { ADD_NEW_FAVORITE_ACTION, REMOVE_FAVORITE_ACTION, SET_CURRENT_WEATHER_LOCATION_ACTION, SET_LOCATION_FORECASTS_ACTION, SET_SELECTED_LOCATION_ACTION, TEL_AVIV_KEY, WEATHER_LOCAL_STORAGE } from "../consts/strings";
-import { IActionT, IFavoriteListT, IWeatherReducerStateT } from "./reducer.interfaces";
+import { ADD_NEW_FAVORITE_ACTION, REMOVE_FAVORITE_ACTION, SET_CURRENT_WEATHER_LOCATION_ACTION, SET_IS_DARK_MODE_ACTION, SET_IS_IMPERIAL_VAL_ACTION, SET_LOCATION_FORECASTS_ACTION, SET_SELECTED_LOCATION_ACTION, TEL_AVIV_KEY, WEATHER_LOCAL_STORAGE } from "../consts/strings";
+import { IActionT, IWeatherReducerStateT } from "./reducer.interfaces";
+import { addNewFavorite, removeFavorite, saveToLocalStorage } from "./weatherReducerFunction";
 
 const initState: IWeatherReducerStateT = {
   favoriteList: [],
   locationForecasts:[],
   locationSelected: {key: TEL_AVIV_KEY, location:"Tel Aviv"},
-  currentWeatherLocation:null
+  currentWeatherLocation:null,
+  isImperialVal: false,
+  isDarkMode: false,
 }
 
 const WeatherReducer = (state = initState, action: IActionT) => {
@@ -20,25 +23,12 @@ const WeatherReducer = (state = initState, action: IActionT) => {
       return saveToLocalStorage({...state, locationSelected: {...action.locationSelected}});
     case SET_CURRENT_WEATHER_LOCATION_ACTION:
       return saveToLocalStorage({...state, currentWeatherLocation: {...action.currentWeatherLocation}});
+    case SET_IS_IMPERIAL_VAL_ACTION:
+      return saveToLocalStorage({...state, isImperialVal: action.isImperialVal});
+    case SET_IS_DARK_MODE_ACTION:
+      return saveToLocalStorage({...state, isDarkMode: action.isDarkMode});
     default:
       return (localStorage[WEATHER_LOCAL_STORAGE]) ? JSON.parse(localStorage[WEATHER_LOCAL_STORAGE]) : state;
   }
 };
 export default WeatherReducer;
-
-const saveToLocalStorage = (stateToSave: IWeatherReducerStateT) => {
-  localStorage.setItem(WEATHER_LOCAL_STORAGE, JSON.stringify(stateToSave));
-  return stateToSave;
-}
-
-const addNewFavorite = (state: IWeatherReducerStateT, favorite: IFavoriteListT) => {
-  let tempFavoriteList:IFavoriteListT[] = [];
-  if( state.favoriteList) tempFavoriteList = state.favoriteList;
-  tempFavoriteList.push({...favorite});
-  return { ...state, favoriteList: tempFavoriteList };
-}
-
-const removeFavorite = (state: IWeatherReducerStateT, favoriteKey: string) => {
-  let tempFavoriteList:IFavoriteListT[] = state.favoriteList.filter(fav => fav.cityKey !== favoriteKey);
-  return { ...state, favoriteList: tempFavoriteList };
-}
