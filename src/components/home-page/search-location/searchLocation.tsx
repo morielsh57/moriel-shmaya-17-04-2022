@@ -11,12 +11,12 @@ const SearchLocation: React.FC = (props) => {
   const [searchResult, setSearchResult] = useState<ILocationAutoCompleteApiT[]>([]);
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout>();
   const [selectIndex, setSelectIndex] = useState<number>(0);
+  const [inputValInvalid, setInputValInvalid] = useState<boolean>(false);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch();
 
   const onSearchKeyup = (e:React.KeyboardEvent<HTMLInputElement>) => {
     const inputValue = searchInputRef.current?.value;
-    console.log(e);
     let isValidValue = checkValueInput(inputValue!);
     if (isValidValue && inputValue!.length > 1) {
       if (typingTimeout) clearTimeout(typingTimeout);
@@ -30,7 +30,14 @@ const SearchLocation: React.FC = (props) => {
   }
 
   const checkValueInput = (inputValue:string) => {
-
+    // regexp return true if there is character that is not the english chart or space
+    var regex = new RegExp("[^a-zA-Z\\s]");
+    //if there is a character that is no A-Z a-z or space we return false
+    if(regex.test(inputValue)){
+      setInputValInvalid(true);
+      return false;
+    }
+    setInputValInvalid(false);
     return true;
   }
 
@@ -85,7 +92,8 @@ const SearchLocation: React.FC = (props) => {
     <section className="search-location-container">
       <div className="search-field">
         <button><SearchOutlined /></button>
-        <input type="text" placeholder="Search" ref={searchInputRef} onKeyUp={onSearchKeyup} onFocus={onSearchFocus} onKeyDown={(e) => onKeyDownSelectCityLi(e)} className={`${searchResult.length <= 0 && "no-results"}`} />
+        <input type="text" placeholder="Search" ref={searchInputRef} onKeyUp={onSearchKeyup} onFocus={onSearchFocus} onKeyDown={(e) => onKeyDownSelectCityLi(e)} className={`${searchResult.length <= 0 && "no-results"} ${inputValInvalid && "invalid-val"}`} />
+        {inputValInvalid && <small className="error-invalid">English letters only</small>}
       </div>
       {searchResult.length > 0 &&
         <ul className="search-results">

@@ -2,7 +2,7 @@
   position: absolute;
   width: 100%;
   left: 0;
-  top: -55px;
+  top: -65px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,6 +33,15 @@
       &.no-results{
         border-radius: 6px;
       }
+      &.invalid-val{
+        border: 2px solid #b82f2ffd;
+      }
+    }
+    small.error-invalid{
+      position: absolute;
+      bottom: -16px;
+      left: 4px;
+      color:#b82f2ffd;
     }
   }
   .search-results{
@@ -69,7 +78,7 @@
 
 @media only screen and (max-width: 768px) {
   .search-location-container{
-    top: -65px;
+    top: -75px;
     .search-field{
       button{
         font-size: 1.3em;
