@@ -63,7 +63,7 @@ const SearchLocation: React.FC = (props) => {
     const inputValue = searchInputRef.current?.value;
     if (searchResult.length <= 0 && inputValue!.length > 1) searchCities(inputValue!);
   }
-
+  
   const onKeyDownSelectCityLi = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (searchResult.length > 0) {
       switch (e.code) {
@@ -72,8 +72,6 @@ const SearchLocation: React.FC = (props) => {
           else setSelectIndex(selectIndex+1);
           break;
         case "ArrowUp":
-          console.log("kyeup");
-          
           if(selectIndex - 1 >= 0) setSelectIndex(selectIndex-1);
           break;
         case "Enter":

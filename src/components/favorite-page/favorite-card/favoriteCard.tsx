@@ -17,21 +17,19 @@ const FavoritCard: React.FC<IFavCurrentWeatherT> = ({ cityName, weatherIcon, tem
   const isDarkMode = useSelector((store: IWeatherReducerStateT) => store.isDarkMode);
   const temperatureSign = isImperialVal ? "F" : "C";
   const setSelectedLocation = useSetSelectedLocation();
-  cityName = (cityName.length>13) ? cityName.slice(0,13)+"..." : cityName;
+  cityName = (cityName.length > 13) ? cityName.slice(0, 13) + "..." : cityName;
 
   const onSelectFavorite = () => {
-    setSelectedLocation({key: cityKey, location:cityName});
-    alertMessage(`${cityName} selected`,"success");
+    setSelectedLocation({ key: cityKey, location: cityName });
+    alertMessage(`${cityName} selected`, "success");
   }
 
   return (
-    // <Link to="/" onClick={onSelectFavorite}>
-      <Link  to="/" onClick={onSelectFavorite} className={`weather-card fav-card ${isDarkMode && "dark"}`}>
-        <div className="city">{cityName}</div>
-        <img src={weatherIconsMap.get(weatherIcon)} alt="icon" />
-        <div className="temp">{temperature}°{temperatureSign}</div>
-      </Link>
-    // {/* </Link> */}
+    <Link to="/" onClick={onSelectFavorite} className={`weather-card fav-card ${isDarkMode && "dark"}`}>
+      <div className="city">{cityName}</div>
+      <img src={weatherIconsMap.get(weatherIcon)} alt="icon" />
+      <div className="temp">{temperature}°{temperatureSign}</div>
+    </Link>
   );
 }
 export default FavoritCard;

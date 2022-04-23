@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router";
 import { IWeatherReducerStateT } from "../reducers/reducer.interfaces";
 import Header from "./header/header";
+
 import "./layout.scss";
 import "./layoutDark.scss";
 
