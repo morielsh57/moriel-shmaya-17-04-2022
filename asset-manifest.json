@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/moriel-shmaya-17-04-2022/static/css/main.7f67bc24.css",
+    "main.js": "/moriel-shmaya-17-04-2022/static/js/main.42e376ba.js",
+    "static/js/787.bbd3ffac.chunk.js": "/moriel-shmaya-17-04-2022/static/js/787.bbd3ffac.chunk.js",
+    "static/media/stars.png": "/moriel-shmaya-17-04-2022/static/media/stars.a32cdaaf458e0fceb457.png",
+    "static/media/clouds.png": "/moriel-shmaya-17-04-2022/static/media/clouds.4e5a465a95cc1c964183.png",
+    "static/media/17-s.png": "/moriel-shmaya-17-04-2022/static/media/17-s.4b8d4543699af9743509.png",
+    "static/media/41-s.png": "/moriel-shmaya-17-04-2022/static/media/41-s.da8960711b2a7bdd80c0.png",
+    "static/media/16-s.png": "/moriel-shmaya-17-04-2022/static/media/16-s.02f6796a4b217cbdd262.png",
+    "static/media/15-s.png": "/moriel-shmaya-17-04-2022/static/media/15-s.9aac7942a26db293440b.png",
+    "index.html": "/moriel-shmaya-17-04-2022/index.html",
+    "main.7f67bc24.css.map": "/moriel-shmaya-17-04-2022/static/css/main.7f67bc24.css.map",
+    "main.42e376ba.js.map": "/moriel-shmaya-17-04-2022/static/js/main.42e376ba.js.map",
+    "787.bbd3ffac.chunk.js.map": "/moriel-shmaya-17-04-2022/static/js/787.bbd3ffac.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7f67bc24.css",
+    "static/js/main.42e376ba.js"
+  ]
+}
