@@ -65,3 +65,53 @@ interface IApiDailyForecastsDayNightT{
   IconPhrase:string;
   HasPrecipitation:boolean;
 }
+
+export interface ILocationGeopositionApiT{
+  Version:number;
+  Key:string;
+  Type:string;
+  Rank:number;
+  LocalizedName:string;
+  EnglishName:string;
+  PrimaryPostalCode:string;
+  Region:ILocationGeopositionApiRegionCountryT;
+  Country:ILocationGeopositionApiRegionCountryT;
+  AdministrativeArea:ILocationGeopositionApiAdministrativeAreaT;
+  TimeZone:ILocationGeopositionApiTimeZoneT;
+  GeoPosition:ILocationGeopositionT;
+  IsAlias:boolean;
+  ParentCity:ILocationGeopositionApiParentCityT;
+  SupplementalAdminAreas: any[] | [];
+  DataSets: string[];
+}
+
+interface ILocationGeopositionApiRegionCountryT{
+  ID?:string;
+  LocalizedName:string;
+  EnglishName:string;
+}
+
+interface ILocationGeopositionApiAdministrativeAreaT extends ILocationGeopositionApiRegionCountryT{
+  Level:number;
+  LocalizedType:string;
+  EnglishType:string;
+  CountryID:string;
+}
+
+interface ILocationGeopositionApiTimeZoneT{
+  Code:string;
+  Name:string;
+  GmtOffset:number;
+  IsDaylightSaving:boolean;
+  NextOffsetChange:string;
+}
+
+interface ILocationGeopositionT{
+  Latitude:number;
+  Longitude:number;
+  Elevation: ITemperature;
+}
+
+interface ILocationGeopositionApiParentCityT extends ILocationGeopositionApiRegionCountryT{
+  Key:string;
+}
