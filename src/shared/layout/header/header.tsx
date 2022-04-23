@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { HOME_URL } from "../../consts/url";
 import Navbar from "../navbar/navbar";
 import SwitchModeToggle from "../switch/mode-toggle/switchModeToggle";
 
@@ -13,7 +15,7 @@ const Header: React.FC = (props) => {
         <SwitchModeToggle/>
       </div>
       <div className="logo">
-        Weather<span>Task</span>
+       <Link to={HOME_URL}>Weather<span>Task</span></Link>
       </div>
     </header>
   );
