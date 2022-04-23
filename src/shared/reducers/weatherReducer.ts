@@ -1,11 +1,11 @@
-import { ADD_NEW_FAVORITE_ACTION, REMOVE_FAVORITE_ACTION, SET_CURRENT_WEATHER_LOCATION_ACTION, SET_IS_DARK_MODE_ACTION, SET_IS_IMPERIAL_VAL_ACTION, SET_LOCATION_FORECASTS_ACTION, SET_SELECTED_LOCATION_ACTION, TEL_AVIV_KEY, WEATHER_LOCAL_STORAGE } from "../consts/strings";
+import { ADD_NEW_FAVORITE_ACTION, REMOVE_FAVORITE_ACTION, SET_CURRENT_WEATHER_LOCATION_ACTION, SET_IS_DARK_MODE_ACTION, SET_IS_IMPERIAL_VAL_ACTION, SET_LOCATION_FORECASTS_ACTION, SET_SELECTED_LOCATION_ACTION, WEATHER_LOCAL_STORAGE } from "../consts/strings";
 import { IActionT, IWeatherReducerStateT } from "./reducer.interfaces";
 import { addNewFavorite, removeFavorite, saveToLocalStorage } from "./weatherReducerFunction";
 
 const initState: IWeatherReducerStateT = {
   favoriteList: [],
   locationForecasts:[],
-  locationSelected: {key: TEL_AVIV_KEY, location:"Tel Aviv"},
+  locationSelected: null,
   currentWeatherLocation:null,
   isImperialVal: false,
   isDarkMode: false,

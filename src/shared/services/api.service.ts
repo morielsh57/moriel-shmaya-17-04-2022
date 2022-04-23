@@ -1,6 +1,7 @@
 import axios from "axios";
-import { ACCUWEATHER_API_KEY, ACCUWEATHER_DOMAIN, GET_CURRENT_WEATHER_BY_KEY_URL, GET_FIVE_DAYS_FORECASTS_URL, GET_LOCATION_AUTO_COMPLETE_URL } from "../consts/url";
-import { ICurrentWeatherLocationApiT, IFiveDailyForecastsApiT, ILocationAutoCompleteApiT } from "../consts/weatherApi.interfaces";
+import { alertMessage } from "../consts/notification";
+import { ACCUWEATHER_API_KEY, ACCUWEATHER_DOMAIN, GET_CURRENT_WEATHER_BY_KEY_URL, GET_FIVE_DAYS_FORECASTS_URL, GET_LOCATION_AUTO_COMPLETE_URL, GET_LOCATION_BY_GEOPOSITION_URL } from "../consts/url";
+import { ICurrentWeatherLocationApiT, IFiveDailyForecastsApiT, ILocationAutoCompleteApiT, ILocationGeopositionApiT } from "../consts/weatherApi.interfaces";
 
 const axiosInstance = axios.create({
   baseURL: ACCUWEATHER_DOMAIN,
@@ -17,7 +18,8 @@ export const GET_LOCATION_AUTO_COMPLETE = async(location:string) =>{
     return locationData.data;
   }
   catch(error){
-    throw new Error("there is a problem location not found");
+    alertMessage("there was a problem geting the location", "error");
+    throw new Error("there was a problem geting the location");
   }
 }
 
@@ -29,7 +31,8 @@ export const GET_CURRENT_WEATHER_BY_KEY = async(locationKey:string) =>{
     return currentWeatherData.data[0];
   }
   catch(error){
-    throw new Error("there is a problem");
+    alertMessage("There was a problem geting the current weather", "error");
+    throw new Error("There was a problem geting the current weather");
   }
 }
 
@@ -41,6 +44,19 @@ export const GET_FIVE_DAYS_FORECASTS = async(locationKey:string,metricValue:bool
     return forcastsData.data;
   }
   catch(error){
-    throw new Error("there is a problem");
+    alertMessage("There was a problem geting the forcasts", "error");
+    throw new Error("There was a problem geting the forcasts");
+  }
+}
+
+// get location by geoposition (lat,lon)
+export const GET_LOCATION_BY_GEOPOSITION = async(lat:number,lon:number) => {
+  try{
+    const locationData = await axiosInstance.get<ILocationGeopositionApiT>(GET_LOCATION_BY_GEOPOSITION_URL,{params:{q:`${lat},${lon}`}});
+    return locationData.data;
+  }
+  catch(error){
+    alertMessage("There was a problem geting the location geoposition", "error");
+    throw new Error("There was a problem geting the location geoposition");
   }
 }

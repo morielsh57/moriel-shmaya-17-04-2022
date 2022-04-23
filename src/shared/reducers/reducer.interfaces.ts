@@ -2,7 +2,7 @@ export interface IWeatherReducerStateT{
   // Map<citykey,cityName> to search in O1 if specific city is in the fazvorite list
   favoriteList: IFavoriteListT[];
   locationForecasts:ILocationForecastsT[];
-  locationSelected:ILocationSelectetT;
+  locationSelected:ILocationSelectetT | null;
   currentWeatherLocation:ICurrentWeatherLocationT|null;
   isImperialVal: boolean;
   isDarkMode: boolean;
