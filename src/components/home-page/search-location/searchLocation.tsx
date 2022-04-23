@@ -15,6 +15,7 @@ const SearchLocation: React.FC = (props) => {
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const setSelectedLocation = useSetSelectedLocation();
 
+  //if the input value valid (english letters) and the input value length is more than 1 run the search-city function after 300ms - avoid unnecessary multiple requests when the user enter the city name
   const onSearchKeyup = (e:React.KeyboardEvent<HTMLInputElement>) => {
     const inputValue = searchInputRef.current?.value;
     let isValidValue = checkValueInput(inputValue!);
@@ -52,6 +53,7 @@ const SearchLocation: React.FC = (props) => {
     }
   }
 
+  //when user select item from the list result
   const onSelectLocation = (key: string, locationName: string) => {
     setSearchResult([]);
     setSelectedLocation({ key: key, location: locationName })
@@ -64,6 +66,7 @@ const SearchLocation: React.FC = (props) => {
     if (searchResult.length <= 0 && inputValue!.length > 1) searchCities(inputValue!);
   }
   
+  // to make arrows keyboard work
   const onKeyDownSelectCityLi = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (searchResult.length > 0) {
       switch (e.code) {

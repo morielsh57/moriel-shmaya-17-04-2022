@@ -30,6 +30,7 @@ const Favorite: React.FC = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isImperialVal])
 
+  //run on the favorite list and get the current wether for each favorite and push this data to array state
   const setCurrentWeatherFavList = async () => {
     try {
       let favoritesCurrentWeatherArr: IFavCurrentWeatherT[] = [];

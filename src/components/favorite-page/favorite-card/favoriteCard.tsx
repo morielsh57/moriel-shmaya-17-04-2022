@@ -15,8 +15,8 @@ import "./favoriteCardDark.scss";
 const FavoritCard: React.FC<IFavCurrentWeatherT> = ({ cityName, weatherIcon, temperature, cityKey }) => {
   const isImperialVal = useSelector((store: IWeatherReducerStateT) => store.isImperialVal);
   const isDarkMode = useSelector((store: IWeatherReducerStateT) => store.isDarkMode);
-  const temperatureSign = isImperialVal ? "F" : "C";
   const setSelectedLocation = useSetSelectedLocation();
+  const temperatureSign = isImperialVal ? "F" : "C";
   cityName = (cityName.length > 13) ? cityName.slice(0, 13) + "..." : cityName;
 
   const onSelectFavorite = () => {

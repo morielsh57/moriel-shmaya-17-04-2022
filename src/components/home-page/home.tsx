@@ -25,15 +25,16 @@ const Home: React.FC = (props) => {
   const setSelectedLocation = useSetSelectedLocation();
 
   useEffect(() => {
+    //if there is location saved in the localstorage use it else get tel-aviv by default
     if(locationSelected){
-      getlocation5Forecasts();
+      getlocation5ForecastsByKey();
       getCurrentWeatherByLocation();
     }
     else getTelAvivByGeoposition()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locationSelected, isImperialVal]);
 
-  const getlocation5Forecasts = async () => {
+  const getlocation5ForecastsByKey = async () => {
     try {
       const forecastsRes: IFiveDailyForecastsApiT = await GET_FIVE_DAYS_FORECASTS(locationSelected!.key, !isImperialVal);
       const locationForecasts: ILocationForecastsT[] = forecastsRes.DailyForecasts.map((dayItem: IFiveDailyForecastsApiDailyForecastsT) => {
