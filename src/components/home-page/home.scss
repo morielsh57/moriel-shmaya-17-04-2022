@@ -9,8 +9,8 @@ main{
     background-image: url("../../assets/images/clouds.png");
     background-position: right;
     background-size: cover;
-    -webkit-animation: fadein 4s linear forwards;
-    animation:  fadein 4s linear forwards, animatedBackground 220s linear infinite alternate;
+    -webkit-animation: fadein 2s linear forwards;
+    animation:  fadein 2s linear forwards, animatedBackground 220s linear infinite alternate;
     .clouds{
       text-align: center;
       img{

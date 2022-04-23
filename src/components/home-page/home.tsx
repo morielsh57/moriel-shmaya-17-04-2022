@@ -45,7 +45,6 @@ const Home: React.FC = (props) => {
           nightIcon: dayItem.Night.Icon
         }
       });
-      // dispatch({ type: SET_LOCATION_FORECASTS_ACTION, locationForecasts: locationForecasts });
       setLocationForcasts(locationForecasts);
     }
     catch (err) {
@@ -65,7 +64,6 @@ const Home: React.FC = (props) => {
         iconNumber: currentWeatherRes.WeatherIcon,
         temperature: isImperialVal ? currentWeatherRes.Temperature.Imperial.Value : currentWeatherRes.Temperature.Metric.Value
       }
-      // dispatch({ type: SET_CURRENT_WEATHER_LOCATION_ACTION, currentWeatherLocation: currentWeather });
       setCurrentWeatherLocation(currentWeather);
     }
     catch (err) {
@@ -77,7 +75,6 @@ const Home: React.FC = (props) => {
   //get tel-aviv details by geoposition and set the locationSelected global state to tel-aviv details
   const getTelAvivByGeoposition = async() => {
     const telAvivData: ILocationGeopositionApiT = await GET_LOCATION_BY_GEOPOSITION(TEL_AVIV_GEOPOSITION_LAT,TEL_AVIV_GEOPOSITION_LON);
-    // dispatch({ type: SET_SELECTED_LOCATION_ACTION, locationSelected: { key: telAvivData.Key, location: telAvivData.AdministrativeArea.LocalizedName } });
     setSelectedLocation({key: telAvivData.Key, location: telAvivData.AdministrativeArea.LocalizedName});
   }
 
