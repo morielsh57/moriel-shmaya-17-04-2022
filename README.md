@@ -6,3 +6,4 @@
 - The website is fully **responsive**.
 - The input validation in the search bar is done with a **Regexp**.
 - The auto-complete request is sent after a **timeout** of 300ms to avoid unnecessary multiple requests.
+- Because of the time limit I only put effort into the design of the home page. The emphasis in the favorites page was on functionality.
