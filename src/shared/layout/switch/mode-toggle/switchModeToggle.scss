@@ -6,3 +6,16 @@
   }
 }
 
+@media only screen and (max-width: 500px) {
+  .switch-mode-container>div{
+    font-size: 1em;
+    &:last-child{
+      margin-left: 4px;
+    }
+  
+    &:first-child{
+      text-align: end;
+      margin-right: 4px;
+    }
+  }
+}

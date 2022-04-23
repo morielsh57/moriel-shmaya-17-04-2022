@@ -50,9 +50,9 @@
         width: 50%;
       }
     }
-    .fav{
+    .fav-toggle{
       padding: 12px 8px;
-      button{
+      button.fav-btn{
         font-size: 2.1em;
         &:hover{
           color: black;
@@ -64,16 +64,24 @@
 
 @media only screen and (max-width: 590px) {
   .weather-top{
+    padding: 10px 0px 10px 15px;
     .current img{
         width: 60%;
     }
-    .fav{
-      padding: 12px 8px;
-      button{
+    .fav-toggle{
+      padding: 12px 0px;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-start;
+      button.fav-btn{
+        margin-right: 25px;
         font-size: 2.2em;
         &:hover{
           color: black;
         }
+      }
+      .switch-container{
+        margin-right: 30px;
       }
     }
   }

@@ -23,3 +23,9 @@ nav{
     }
   }
 }
+
+@media only screen and (max-width: 500px) {
+  nav a{
+    font-size: 1.2em;
+  }
+}
