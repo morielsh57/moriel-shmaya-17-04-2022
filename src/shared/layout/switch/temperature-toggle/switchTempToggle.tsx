@@ -2,7 +2,7 @@ import { Switch } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
 import { IWeatherReducerStateT } from "../../../reducers/reducer.interfaces";
-import { useSetIsImperialVal } from "../../../hooks/useSetisImperialTempVal";
+import { useSetIsImperialVal } from "../../../hooks/useSetIsImperialTempVal";
 
 import "./switchTempToggle.scss";
 import "../switchToggleDarkMode.scss";

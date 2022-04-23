@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
+  width: 60%;
   margin: 5px 20px;
   padding: 0px 0px;
 
@@ -32,15 +32,15 @@
   // overide switch compnent antd style
   .ant-switch{
     background-color: #082c55;
-    width: 85px;
-    height: 32px;
+    width: 56px;
+    height: 29px;
   }
   
   .ant-switch-handle{
-    width: 24px;
-    height: 24px;
-    left: 4px;
-    top: 4px;
+    width: 19px;
+    height: 19px;
+    left: 5px;
+    top: 5px;
     &:before{
       background-color: rgb(255, 255, 255);
       border-radius: 50%;
@@ -48,7 +48,7 @@
   }
   
   .ant-switch-checked .ant-switch-handle{
-    left: calc(100% - 26px - 2px);
+    left: calc(100% - 23px - 2px);
   }
   
   .ant-switch-checked:focus {

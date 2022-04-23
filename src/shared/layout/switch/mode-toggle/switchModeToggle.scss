@@ -4,22 +4,5 @@
   > div{
     font-size: 1.2em;
   }
-
-  // overide switch compnent antd style
-  .ant-switch{
-    width: 56px;
-    height: 29px;
-  }
-  
-  .ant-switch-handle{
-    width: 19px;
-    height: 19px;
-    left: 5px;
-    top: 5px;
-  }
-   
-  .ant-switch-checked .ant-switch-handle{
-    left: calc(100% - 23px - 2px);
-  }
 }
 
