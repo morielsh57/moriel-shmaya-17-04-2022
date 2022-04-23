@@ -6,13 +6,14 @@ import { GET_CURRENT_WEATHER_BY_KEY } from "../../shared/services/api.service";
 import FavoritCard from "./favorite-card/favoriteCard";
 import { alertMessage } from "../../shared/consts/notification";
 import SwitchTempToggle from "../../shared/layout/switch/temperature-toggle/switchTempToggle";
+
 import "../home-page/five-days-forecasts/fiveDaysForecasts.scss";
 import "../home-page/home.scss";
 import './favorite.scss';
 import './favoriteDark.scss';
 
 export interface IFavCurrentWeatherT {
-  city: string;
+  cityName: string;
   cityKey: string
   weatherIcon: number;
   temperature: number;
@@ -35,7 +36,7 @@ const Favorite: React.FC = (props) => {
       await Promise.all(favoriteList.map(async (cityValue, indx) => {
         const currentWeatherRes: ICurrentWeatherLocationApiT = await GET_CURRENT_WEATHER_BY_KEY(cityValue.cityKey);
         const favoritesCurrentWeatherobj: IFavCurrentWeatherT = {
-          city: cityValue.cityName,
+          cityName: cityValue.cityName,
           cityKey: cityValue.cityKey,
           weatherIcon: currentWeatherRes.WeatherIcon,
           temperature: isImperialVal ? currentWeatherRes.Temperature.Imperial.Value : currentWeatherRes.Temperature.Metric.Value
@@ -57,7 +58,6 @@ const Favorite: React.FC = (props) => {
         <SwitchTempToggle />
       </div>
       <h1>{favoriteList ? "My Favorites" : "No Favorite Found"}</h1>
-      {/* <div>{favsCurrentWeather[0].city}</div> */}
       <div className="fav-container">
         {
           favsCurrentWeather.length > 0 && favsCurrentWeather.map((item, indx) => {
@@ -65,7 +65,7 @@ const Favorite: React.FC = (props) => {
               <FavoritCard
                 key={item.cityKey}
                 cityKey={item.cityKey}
-                city={item.city}
+                cityName={item.cityName}
                 weatherIcon={item.weatherIcon}
                 temperature={item.temperature}
               />

@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { GET_LOCATION_AUTO_COMPLETE } from "../../../shared/services/api.service";
-import { useDispatch } from "react-redux";
-import { SET_SELECTED_LOCATION_ACTION } from "../../../shared/consts/strings";
 import { ILocationAutoCompleteApiT } from "../../../shared/consts/weatherApi.interfaces";
-import "./searchLocation.scss";
 import { alertMessage } from "../../../shared/consts/notification";
+import { useSetSelectedLocation } from "../../../shared/hooks/useSetSelectedLocation";
+
+import "./searchLocation.scss";
 
 const SearchLocation: React.FC = (props) => {
   const [searchResult, setSearchResult] = useState<ILocationAutoCompleteApiT[]>([]);
@@ -13,7 +13,7 @@ const SearchLocation: React.FC = (props) => {
   const [selectIndex, setSelectIndex] = useState<number>(0);
   const [inputValInvalid, setInputValInvalid] = useState<boolean>(false);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
-  const dispatch = useDispatch();
+  const setSelectedLocation = useSetSelectedLocation();
 
   const onSearchKeyup = (e:React.KeyboardEvent<HTMLInputElement>) => {
     const inputValue = searchInputRef.current?.value;
@@ -54,7 +54,7 @@ const SearchLocation: React.FC = (props) => {
 
   const onSelectLocation = (key: string, locationName: string) => {
     setSearchResult([]);
-    dispatch({ type: SET_SELECTED_LOCATION_ACTION, locationSelected: { key: key, location: locationName } })
+    setSelectedLocation({ key: key, location: locationName })
     searchInputRef.current!.value = "";
     alertMessage(`${locationName} selected`, "success");
   }

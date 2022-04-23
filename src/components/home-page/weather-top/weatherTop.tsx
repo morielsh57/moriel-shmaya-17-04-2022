@@ -1,9 +1,9 @@
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { weatherIconsMap } from "../../../shared/consts/icons/weatherIconsMap";
-import { ADD_NEW_FAVORITE_ACTION, REMOVE_FAVORITE_ACTION } from "../../../shared/consts/strings";
+import { useAddNewFavorite } from "../../../shared/hooks/useAddNewFavorite";
+import { useRemoveFavorite } from "../../../shared/hooks/useRemoveFavorite";
 import SwitchTempToggle from "../../../shared/layout/switch/temperature-toggle/switchTempToggle";
 import { IWeatherReducerStateT } from "../../../shared/reducers/reducer.interfaces";
 
@@ -17,7 +17,8 @@ const WeatherTop: React.FC = (props) => {
   const isImperialVal = useSelector((store: IWeatherReducerStateT) => store.isImperialVal);
   const isDarkMode = useSelector((store: IWeatherReducerStateT) => store.isDarkMode);
   const temperatureSign = isImperialVal ? "F" : "C";
-  const dispatch = useDispatch();
+  const addNewFavorite = useAddNewFavorite();
+  const removeFavorite = useRemoveFavorite();
 
   useEffect(() => {
     setIsFavorite(false);
@@ -32,8 +33,8 @@ const WeatherTop: React.FC = (props) => {
   }
 
   const setIsFav = (type: "remove" | "add") => {
-    if (type === "add") dispatch({ type: ADD_NEW_FAVORITE_ACTION, favorite: { cityKey: currentWeatherLocation!.cityKey, cityName: currentWeatherLocation!.cityName } });
-    else dispatch({ type: REMOVE_FAVORITE_ACTION, favoriteKey: currentWeatherLocation!.cityKey });
+    if (type === "add") addNewFavorite({ cityKey: currentWeatherLocation!.cityKey, cityName: currentWeatherLocation!.cityName });
+    else removeFavorite(currentWeatherLocation!.cityKey);
     setIsFavorite(!isFavorite);
   }
 
